@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:posts_app_with_test/common/ui/localization_cubit/localization_cubit.dart';
 import 'package:posts_app_with_test/di/service_locator.dart';
+import 'package:posts_app_with_test/l10n/l10n.dart';
 import 'package:posts_app_with_test/posts/Ui/cubit/post_cubit.dart';
 import 'package:posts_app_with_test/posts/Ui/widgets/post_list.dart';
 
@@ -10,9 +12,33 @@ class PostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Posts')),
+      appBar: AppBar(
+        title: Text(context.l10n.posts),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            child: InkWell(
+              onTap: () => sl<LocalizationCubit>().changeLocale(),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(6),
+                  ),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: context.l10n.localeName == 'bn'
+                      ? const Text('English')
+                      : const Text('বাংলা'),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
       body: BlocProvider(
-        create: (_) => sl<PostCubit>()..fetchPosts(),
+        create: (_) => PostCubit()..fetchPosts(),
         child: BlocBuilder<PostCubit, PostState>(
           builder: (context, state) {
             if (state is PostLoading) {

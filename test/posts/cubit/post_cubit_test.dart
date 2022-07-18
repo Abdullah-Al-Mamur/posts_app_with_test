@@ -24,11 +24,11 @@ void main() {
     setupLocators();
   });
 
-  test('test initial state of post cubit', () {
+  test('test initial state of post localization_cubit', () {
     expect(PostInitial(), testSl<PostCubit>().state);
   });
 
-  group('post cubit test', () {
+  group('post localization_cubit test', () {
     blocTest<PostCubit, PostState>(
       'emits [loading, error] when post throws error',
       setUp: () async {

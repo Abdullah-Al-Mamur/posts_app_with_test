@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:posts_app_with_test/di/service_locator.dart';
 import 'package:posts_app_with_test/posts/domain/entities/post.dart';
 import 'package:posts_app_with_test/posts/domain/usecase/post_usecase.dart';
-
-import '../../../di/service_locator.dart';
 
 part 'post_state.dart';
 
